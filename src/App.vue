@@ -6,9 +6,12 @@
         <input type="checkbox" v-model="less.show">
       </label>
     </template>
-    <button @click="showLesson">Show</button>
+<!--    <button @click="showLesson">Show</button>-->
     <HelloWorld msg="let's explore Vue.js !" v-show="lessons[0].show"/>
+    <transition name="fade">
     <NextLesson msg="Second Lesson" v-show="lessons[1].show"/>
+    </transition>
+    <Form msg="Form consult" v-show="lessons[2].show"/>
   </div>
 </template>
 
@@ -16,12 +19,14 @@
 import HelloWorld from './components/HelloWorld.vue'
 import NextLesson from "@/components/NextLesson";
 import {eventBus} from "@/main";
+import Form from "@/components/Form";
 
 export default {
   name: 'App',
   components: {
     HelloWorld,
-    NextLesson
+    NextLesson,
+    Form,
   },
   data() {
     return {
@@ -30,6 +35,7 @@ export default {
         {title:'lesson1', show: true},
         {title:'lesson2', show: true},
         {title:'lesson3', show: true},
+        {title:'lesson4', show: false},
       ]
     }
   },
@@ -67,5 +73,16 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+}
+
+.fade-enter-active {
+  transition: all .3s ease;
+}
+.fade-leave-active {
+  transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.fade-enter, .fade-leave-to {
+  transform: translateX(100px);
+  opacity: 0;
 }
 </style>

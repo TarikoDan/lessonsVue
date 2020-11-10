@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
+    <h1 v-highlight="'greenyellow'">{{ msg | toUpperCase}}</h1>
     <p>
       For a guide and recipes on how to configure / customize this project,<br>
       check out the
@@ -9,11 +9,22 @@
     <label>ResizeLogo:
       <input @keyup.enter="resizeLogo" type="number" v-model="size">
     </label>
+
+    <div class="counter">
+      <span>{{ computedResult }}</span>
+      <button v-on:click="decrease(5)">MIN</button>
+      <span style="width: 50px; display: inline-block" id="counter" :class="counter>0 ? 'green' : 'red'">{{ counter }}</span>
+      <button v-on:click="increase()">ADD</button>
+      <span>{{ writeResult() }}</span>
+    </div>
+
+    <hr>
   </div>
 </template>
 
 <script>
 import {eventBus} from "@/main";
+import {Counter} from "@/components/mixins/CounterMixin.vue";
 
 export default {
   name: "NextLesson",
@@ -27,6 +38,8 @@ export default {
     }
   },
 
+  mixins: [Counter],
+
   methods: {
     resizeLogo() {
       eventBus.$emit("resizeLogo", this.size)
@@ -37,18 +50,20 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
+.counter {
+  margin: 20px auto;
+  padding: 10px;
+  border: 2px inset #42b983;
+  width: 50%;
 }
 a {
   color: #42b983;
 }
+.red {
+  background: #ff8282;
+}
+.green {
+  background: #7efa7e;
+}
+
 </style>

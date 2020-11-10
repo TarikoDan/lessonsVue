@@ -3,6 +3,12 @@ import App from './App.vue'
 
 Vue.config.productionTip = false
 
+Vue.filter("toUpperCase", (val) => val.toUpperCase())
+
+Vue.directive("highlight", (el, binding) => {
+    el.style.backgroundColor = binding.value
+})
+
 export const eventBus = new Vue()
 
 new Vue({

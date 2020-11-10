@@ -13,6 +13,7 @@
     <a v-if="counter === 0" href="https://cli.vuejs.org" target="_blank" >1 Vue-cli documentation</a>
     <a v-else-if="counter < 0" v-bind:href="documentationLink" target="_blank" >2 Vue-cli documentation</a>
     <a v-else :href='documentationLink' target="_blank" >3 Vue-cli documentation</a>
+
     <span v-html="html"></span>
 
     <span>{{computedResult}}</span>
@@ -28,7 +29,7 @@
 
     <div v-show="counter !== 0">
       <label>input your color:
-        <input type="text"
+        <input ref="a123" type="color"
              @keyup.enter=alert
              :title="sayHello()"
              v-model="colour"
@@ -42,14 +43,17 @@
     </div>
     <ul>
       <li v-for="n in 10" :key="n">
-        <span :ref="`ref${n}`">{{ n }}</span>
+        <span :ref="`ref${n}`" @click="showRefs">{{ n }}</span>
       </li>
       <li @click="showRefs()">check</li>
     </ul>
+    <hr>
   </div>
 </template>
 
 <script>
+import {Counter} from "@/components/mixins/CounterMixin.vue";
+
 export default {
   name: 'HelloWorld',
   props: {
@@ -62,7 +66,7 @@ export default {
       name: "Vue",
       documentationLink: "https://cli.vuejs.org",
       html: '<h3>this is title #3</h3>',
-      counter: 0,
+      // counter: 0,  //! replace to mixin
       x:0,
       y:0,
       selected: true,
@@ -70,11 +74,14 @@ export default {
     }
   },
 
+  mixins: [Counter],
+
   computed: {
-    computedResult() {
-      console.log("comp");
-      return this.counter>5 ? "  more than 5" : "  less than 5"
-    },
+    //! replace to mixin
+    // computedResult() {
+    //   console.log("comp");
+    //   return this.counter>5 ? "  more than 5" : "  less than 5"
+    // },
     changeable() {
       return {'background': `RGB(${(this.x-455)*255/100},${(this.y-350)*255/100},0)`}
     }
@@ -88,12 +95,17 @@ export default {
     changeTitle(s) {
       this.title = s
     },
-    increase(x=1) {
-      this.counter+=x
-    },
-    decrease(x=1) {
-      this.counter-=x
-    },
+    //! replace to mixin
+    // increase(x=1) {
+    //   this.counter+=x
+    // },
+    // decrease(x=1) {
+    //   this.counter-=x
+    // },
+    // writeResult() {
+    //   console.log("res");
+    //   return this.counter>5 ? "  more than 5" : "  less than 5"
+    // },
     checkCoordinates(event) {
       this.x=event.clientX;
       this.y=event.clientY;
@@ -102,13 +114,12 @@ export default {
       console.log(event);
       alert(event.key)
     },
-    writeResult() {
-      console.log("res");
-      return this.counter>5 ? "  more than 5" : "  less than 5"
-    },
-    showRefs() {
+    showRefs(event) {
       console.log(this.$refs.ref1.values().next());
       console.log(this.$refs.ref2);
+      console.log(this.$refs.ref3[0].innerText);
+      console.log(this.$refs);
+      console.log(event.target.innerText);
     }
   }
 }
