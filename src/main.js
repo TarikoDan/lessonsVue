@@ -2,6 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 // import VueResource from "vue-resource" /! changed to the next exp:
 import './vueresource'
+import router from "@/routes";
 
 Vue.config.productionTip = false
 
@@ -16,5 +17,6 @@ Vue.directive("highlight", (el, binding) => {
 export const eventBus = new Vue()
 
 new Vue({
+    router,
   render: h => h(App),
 }).$mount('#app')
