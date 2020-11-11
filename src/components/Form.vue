@@ -17,12 +17,13 @@
     </div>
 
     <button @click="getAll">GET ALL</button>
-    <div v-for="user in users" :key="user.id">
-      {{ user.name }} - {{ user.email }} -- id: {{user.id}}
-      <button @click="edit(user.id)">EDIT</button>
-      <button @click="remove(user.id)">REMOVE</button>
-      <br>
-    </div>
+    <ul v-for="user in users" :key="user.id">
+      <li>
+        {{ user.name }} - {{ user.email }} -- id: {{ user.id }}
+        <button @click="edit(user.id)">EDIT</button>
+        <button @click="remove(user.id)">REMOVE</button>
+      </li>
+    </ul>
 
     <hr>
   </div>
