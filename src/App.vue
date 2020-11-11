@@ -1,17 +1,20 @@
 <template>
   <div id="app">
     <img ref="logo" :width="logoWidth" alt="Vue logo" src="./assets/logo.png">
+
     <template v-for="(less, i) in lessons">
       <label :key="i"> {{ less.title }}
         <input type="checkbox" v-model="less.show">
       </label>
     </template>
+
 <!--    <button @click="showLesson">Show</button>-->
     <HelloWorld msg="let's explore Vue.js !" v-show="lessons[0].show"/>
     <transition name="fade">
     <NextLesson msg="Second Lesson" v-show="lessons[1].show"/>
     </transition>
     <Form msg="Form consult" v-show="lessons[2].show"/>
+
   </div>
 </template>
 

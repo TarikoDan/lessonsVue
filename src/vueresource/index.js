@@ -1,0 +1,7 @@
+import Vue from 'vue'
+import VueResource from "vue-resource"
+
+Vue.use(VueResource);
+
+Vue.http.options.root = ("https://less3-b1930.firebaseio.com/");
+
