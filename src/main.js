@@ -1,12 +1,11 @@
 import Vue from 'vue'
 import App from './App.vue'
-// import VueResource from "vue-resource" /! changed to the next exp:
 import './vueresource'
 import router from "@/routes";
+import 'bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 Vue.config.productionTip = false
-
-// Vue.use(VueResource)
 
 Vue.filter("toUpperCase", (val) => val.toUpperCase())
 
@@ -18,5 +17,5 @@ export const eventBus = new Vue()
 
 new Vue({
     router,
-  render: h => h(App),
+    render: h => h(App),
 }).$mount('#app')
