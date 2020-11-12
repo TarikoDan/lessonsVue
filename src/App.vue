@@ -10,14 +10,15 @@
         HELLO
       </router-link>
 
-      <router-link
-          :to="{name: 'counter', params: {msg: 'counter'}}"
-          class="btn btn-outline-dark"
-          active-class="active"
-          exact
-      >
-        COUNTER
-      </router-link>
+        <router-link
+            :to="{name: 'counter', params: {msg: 'counter'}}"
+            class="btn btn-outline-dark"
+            active-class="active"
+            exact
+
+        >
+          COUNTER
+        </router-link>
 
       <router-link to="/users" class="btn btn-secondary">USERS</router-link>
     </div>
