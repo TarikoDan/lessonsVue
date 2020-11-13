@@ -105,7 +105,7 @@ export default {
         email: "",
         age: '',
         gender: '',
-        news: [''],
+        news: [],
         info: ''
       },
       users: [],
@@ -115,8 +115,9 @@ export default {
   methods: {
     async addNew() {
       let response = await Api.Forms.create(this.user);
+      console.log(response)
       this.users.push({...this.user, id: response.body.name});
-      this.cleanForm()
+      this.cleanForm() /*because of @submit.prevent*/
     },
 
     async getAll() {
@@ -136,10 +137,9 @@ export default {
 
     async sendEdited() {
       console.log(await Api.Forms.update(this.user.id, this.user));
-      // console.log(await Api.Forms.update(user.id, this.user));
       this.users = this.users.map((user) => user = user.id === this.user.id ? {...this.user} : user);
       this.isEdited = false;
-      this.cleanForm()
+      this.cleanForm()  /*because of @submit.prevent*/
     },
 
     async remove(id) {
