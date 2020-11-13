@@ -114,9 +114,7 @@ export default {
 
   methods: {
     async addNew() {
-      // this.$http.post('users.json', this.user)
       let response = await Api.Forms.create(this.user);
-      console.log(response);
       this.users.push({...this.user, id: response.body.name});
       this.cleanForm()
     },
@@ -131,7 +129,6 @@ export default {
     edit(user) {
       this.isEdited = true
       if (!(user.news instanceof Array)) {
-        console.log("waw")
         user.news = []
       }
       this.user = user
