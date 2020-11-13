@@ -2,70 +2,32 @@
   <div id="app">
     <img ref="logo" :width="logoWidth" alt="Vue logo" src="./assets/logo.png">
 
-    <template v-for="(less, i) in lessons">
-      <label :key="i"> {{ less.title }}
-        <input type="checkbox" v-model="less.show">
-      </label>
-    </template>
-
 <!--    <button @click="showLesson">Show</button>-->
-    <HelloWorld msg="let's explore Vue.js !" v-show="lessons[0].show"/>
-    <transition name="fade">
-    <NextLesson msg="Second Lesson" v-show="lessons[1].show"/>
-    </transition>
-    <Form msg="Form consult" v-show="lessons[2].show"/>
+    <Form msg="Form consult" />
 
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-import NextLesson from "@/components/NextLesson";
 import {eventBus} from "@/main";
 import Form from "@/components/Form";
 
 export default {
   name: 'App',
   components: {
-    HelloWorld,
-    NextLesson,
     Form,
   },
   data() {
     return {
       logoWidth: 100,
-      lessons: [
-        {title:'lesson1', show: true},
-        {title:'lesson2', show: true},
-        {title:'lesson3', show: true},
-        {title:'lesson4', show: false},
-      ]
     }
   },
-   methods: {
-     showLesson() {
-       // this.$refs.less1.style.display = "none";
-     }
-   },
+  created() {
+   eventBus.$on("resizeLogo", (val) => {
+     this.logoWidth = val
+   });
+  },
 
-   created() {
-    eventBus.$on("resizeLogo", (val) => {
-      this.logoWidth = val
-
-    });
-    if (!this.$refs.logo) {
-      console.log("This doesn't exist yet!");
-    }
-
-    this.$nextTick(() => {
-      if (this.$refs.logo) {
-        console.log("Now it does!");
-      }
-  })},
-
-  mounted() {
-    console.log("Now its mounted");
-  }
 }
 </script>
 

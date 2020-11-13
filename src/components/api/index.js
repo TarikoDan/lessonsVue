@@ -1,5 +1,5 @@
-import {Users} from "@/components/api/Users";
+import {Forms} from "@/components/api/Forms";
 
 export const Api = {
-    Users
+    Forms
 }
