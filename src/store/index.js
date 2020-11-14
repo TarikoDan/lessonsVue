@@ -5,24 +5,45 @@ Vue.use(Vuex)
 
 export const store = new Vuex.Store({
     state: {
-        counterX: 0
+        counterX: 0,
+        clicks: 0,
     },
 
     getters: {
-        multiCounter: state => {
-            return state.counterX * 2
+        circuit: state => {
+            return (state.counterX * 2 * Math.PI).toFixed(2)
         },
-        stringCount: state => {
-            return state.counterX + "clicks"
+        circleArea: state => {
+            return (state.counterX * state.counterX * Math.PI).toFixed(2)
+        },
+        clicks: state => {
+            return state.clicks + " clicks"
         }
     },
 
     mutations: {
-        increment: state => {
-            state.counterX++;
+        increment: (state, val) => {
+            state.counterX += val;
+            state.clicks++
         },
-        decrement: state => {
-            state.counterX--;
+        decrement: (state, val) => {
+            state.counterX -= val;
+            state.clicks++
         },
+        resetClicks: state => {
+            state.clicks = 0
+        },
+        resetCounter: state => {
+            state.counterX = 0
+        },
+    },
+
+    actions: {
+        incTimeout:({commit}, payload) => {
+            setTimeout(() => {
+                commit("increment", payload.value)
+            },payload.timeOut)
+
+        }
     }
 })

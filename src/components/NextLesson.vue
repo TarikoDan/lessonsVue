@@ -19,20 +19,30 @@
       <span>{{ writeResult() }}</span>
     </div>
 
+<!--    VUEX-->
     <div class="col-6 mx-auto border border-dark p-3">
       <h4><span class="badge badge-info">Counter with Vuex</span></h4>
-      <div>
-        <button class="btn btn-outline-danger" @click="minus">MIN</button>
-        <h2 class="d-inline-block w-25"><span class="badge badge-info rounded-circle">
-          {{ result }}
-        </span></h2>
-        <button @click="plus" class="btn btn-outline-success">ADD</button>
-        <p><label>Multiply:
-          <!--          <input type="number" @click="multiply(x)" v-model="x">-->
-          {{ multi }}
-        </label></p>
-        {{string}}
-      </div>
+      <button @click="minus(1)" class="btn btn-outline-danger" >MIN</button>
+      <h2 class="d-inline-block w-25">
+        <span :class="[result<0 ? 'badge-danger' : 'badge-success', 'badge',  'rounded-circle']">
+        {{ result }}
+        </span>
+      </h2>
+      <button @click="plus(1)" class="btn btn-outline-success">ADD</button>
+      <h5>
+        <span @click="resetCounter" class="badge badge-warning rounded-pill">reset Counter</span>
+      </h5>
+      <p>Circumference <strong>L = {{ circuit }}</strong> with radius r = {{result}}</p>
+      <p>CircleArea <strong>S = {{ circleArea }}</strong> with radius r = {{result}}</p>
+      <p>
+        <label><input type="number" @keyup.enter="plusX" v-model="x"></label>
+      </p>
+      <p>Actions:
+          <button @click="incTimeout(10, 2000)" class="btn btn-dark">incACT</button>
+      </p>
+
+      <span class="badge badge-dark rounded-pill">{{ clicks }}</span>
+      <span @click="resetClicks" class="badge badge-warning rounded-pill">reset clicks</span>
     </div>
 
     <hr>
@@ -53,7 +63,7 @@ export default {
   data() {
     return {
       size: 0,
-      x: 1
+      x: 0
     }
   },
 
@@ -64,8 +74,9 @@ export default {
       return this.$store.state.counterX
     },
     ...mapGetters({
-      multi: 'multiCounter',
-      string: 'stringCount'
+      circuit: 'circuit',
+      circleArea: 'circleArea',
+      clicks: 'clicks'
     }),
     // multiply() {
     //   return (this.$store.getters.multiCounter)
@@ -83,8 +94,16 @@ export default {
 
     ...mapMutations({
       plus: 'increment',
-      minus: 'decrement'
+      minus: 'decrement',
+      resetClicks: "resetClicks",
+      resetCounter: "resetCounter",
     }),
+
+    plusX() {
+      let x = parseInt(this.x)
+      this.plus(x)
+      this.x = 0
+    },
 
     // decrem() {
     //   this.$store.commit("decrement")
@@ -92,6 +111,10 @@ export default {
     // increm() {
     //   this.$store.commit("increment")
     // },
+
+    incTimeout(value, timeOut) {
+      this.$store.dispatch("incTimeout", {value, timeOut})
+    },
 
   }
 }
