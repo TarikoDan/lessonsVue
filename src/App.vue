@@ -15,12 +15,12 @@
             class="btn btn-outline-dark"
             active-class="active"
             exact
-
         >
           COUNTER
         </router-link>
 
       <router-link to="/users" class="btn btn-secondary">USERS</router-link>
+      <router-link to="/cars" class="btn btn-outline-dark">CARS</router-link>
     </div>
 
     <router-view></router-view>
@@ -37,7 +37,7 @@ export default {
   },
   data() {
     return {
-      logoWidth: 100,
+      logoWidth: 70,
     }
   },
    methods: {

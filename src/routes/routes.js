@@ -4,6 +4,7 @@ import Users from '@/components/Users'
 import NewUser from '@/components/NewUser'
 import User from '@/components/User'
 import EditUser from '@/components/EditUser'
+import CarsVuex from '@/components/CarsVuex'
 
 export const routes = [
     {path: '*', component: HelloWorld, props: {msg: 'BAD URL'}},
@@ -15,4 +16,5 @@ export const routes = [
     {path: "/users/:id", component: User, name: 'user', props: true, children: [
             {path: "edit", component: EditUser, name: 'edit', props: true},
         ]},
+    {path: "/cars", component: CarsVuex}
 ]
