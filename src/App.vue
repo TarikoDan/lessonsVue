@@ -4,7 +4,7 @@
 
     <div class="btn-group" role="group" aria-label="Basic example">
       <router-link
-          :to="{name: 'hello', params: {msg: 'let\'s explore Vue.js !'}}"
+          :to="{name: 'hello', params: {msg: 'Let\'s explore Vue.js !'}}"
           class="btn btn-secondary"
       >
         HELLO

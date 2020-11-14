@@ -10,7 +10,7 @@
     <div class="card border-dark mx-auto my-5" style="max-width: 540px;">
       <div class="row no-gutters">
         <div class="col-md-4">
-          <img src="../assets/logo.png" class="card-img" alt="UserPhoto">
+          <img src="src/assets/logo.png" class="card-img" alt="UserPhoto">
         </div>
         <div class="col-md-8">
 <!--      <div class="card-header">User Details...</div>-->

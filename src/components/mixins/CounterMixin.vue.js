@@ -1,4 +1,4 @@
-export const Counter = {
+export const CounterMixin = {
     data() {
         return {
             counter: 0,

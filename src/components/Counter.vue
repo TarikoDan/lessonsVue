@@ -37,7 +37,7 @@
       <p>
         <label><input type="number" @keyup.enter="plusX" v-model="x"></label>
       </p>
-      <p>Actions:
+      <p>Action with Value 10 & TimeOut 2000:
           <button @click="incTimeout(10, 2000)" class="btn btn-dark">incACT</button>
       </p>
 
@@ -51,11 +51,11 @@
 
 <script>
 import {eventBus} from "@/main";
-import {Counter} from "@/components/mixins/CounterMixin.vue";
+import {CounterMixin} from "@/components/mixins/CounterMixin.vue";
 import {mapGetters, mapMutations} from "vuex";
 
 export default {
-  name: "NextLesson",
+  name: "Counter",
   props: {
     msg: String
   },
@@ -67,7 +67,7 @@ export default {
     }
   },
 
-  mixins: [Counter],
+  mixins: [CounterMixin],
 
   computed: {
     result() {
